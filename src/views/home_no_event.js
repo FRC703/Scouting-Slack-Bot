@@ -3,19 +3,23 @@ const DropdownSection = require("../components/DropdownSection");
 
 async function homeNoEvent(tba, event) {
   let events = await tba.getTeamEventListSimple(703, 2019);
-  console.log(events);
-  let dropdown_events = events.map(event => ({
-    text: {
-      type: "plain_text",
-      text: event.name,
-      emoji: false
-    },
-    value: event.key
-  }));
-  return [
+  let dropdown_events = events.map(e => {
+    console.log(e.name, e.key);
+    return {
+      text: {
+        type: "plain_text",
+        text: e.name,
+        emoji: false
+      },
+      value: e.key
+    };
+  });
+  let x = [
     TextSection("No event currently selected. Select an event."),
     DropdownSection("Select an event: ", dropdown_events)
   ];
+  console.log(JSON.stringify(x));
+  return x;
 }
 
 module.exports = { homeNoEvent };
