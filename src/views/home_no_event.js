@@ -2,7 +2,7 @@ const TextSection = require("../components/TextSection");
 const DropdownSection = require("../components/DropdownSection");
 
 async function homeNoEvent(tba, event) {
-  let events = await tba.getTeamEventListSimple(703);
+  let events = await tba.getTeamEventListSimple(703, 2019);
   console.log(events);
   let dropdown_events = events.map(event => ({
     text: {
