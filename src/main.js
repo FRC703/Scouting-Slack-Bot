@@ -48,7 +48,7 @@ async function setup() {
 
   // Event Listeners
   slackEvents.on("app_home_opened", apphome);
-  slackInteract.action({ type: "button" }, button);
+  slackInteract.action({ type: ".*" }, button);
   slackEvents.on("error", error => {
     console.log(error);
   });
@@ -74,6 +74,7 @@ async function apphome(event) {
 }
 
 async function button(payload, respond) {
+  console.log(payload);
   let action = payload.actions[0];
   let val_split = action.value.split(":");
   if (val_split[0] === "select_event") {
