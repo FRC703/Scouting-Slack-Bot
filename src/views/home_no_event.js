@@ -1,6 +1,6 @@
 const {
   TextSection,
-  ActionSection,
+  ButtonSection,
   ButtonAction
 } = require("../components/subcomponents");
 const EventComponent = require("../components/EventComponent");
@@ -22,7 +22,7 @@ async function homeNoEvent(tba, event) {
   let x = [
     TextSection("No event currently selected. Select an event."),
     ...eventList.flat(),
-    ActionSection("Debug mode: ", ButtonAction("Debug", "debug"))
+    ButtonSection("Debug mode: ", ButtonAction("Debug", "debug"))
   ];
   return x;
 }
