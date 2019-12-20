@@ -1,7 +1,10 @@
 const {
   TextSection,
   FieldSection,
-  DropdownSection
+  DropdownSection,
+  ButtonAction,
+  ActionSection,
+  Divider
 } = require("./subcomponents");
 
 module.exports = async function Event(event, tba) {
@@ -12,6 +15,8 @@ module.exports = async function Event(event, tba) {
       event.address,
       `Team Count: ${teamCount}`,
       `Date: ${event.start_date}`
-    ])
+    ]),
+    ActionSection(ButtonAction("Select Event", `select_event:${event.key}`)),
+    Divider()
   ];
 };
