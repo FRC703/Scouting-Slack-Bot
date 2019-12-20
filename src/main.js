@@ -60,9 +60,9 @@ async function setup() {
 async function apphome(event) {
   console.log(event);
   let view;
-  // if (db.get(`users.${event.user}`).value() === undefined) {
-  //   db.set(`users.${event.user}`, defaultUser).write();
-  // }
+  if (db.get(`users.${event.user}`).value() === undefined) {
+    db.set(`users.${event.user}`, defaultUser).write();
+  }
   let userPage = db.get(`users.${event.user}.page`).value() || "";
   if (event.tab === "home" && userPage === "") {
     let status = db.get("status").value();
@@ -94,10 +94,10 @@ async function button(payload, respond) {
   if (val_split[0] === "open_tab") {
     switch (val_split[1]) {
       case "debug":
-        db.set(`user.${payload.user}.page`, "debug").write();
+        db.set(`users.${payload.user.id}.page`, "debug").write();
         break;
       case "home":
-        db.set(`user.${payload.user}.page`, "").write();
+        db.set(`users.${payload.user.id}.page`, "").write();
     }
   }
 }
