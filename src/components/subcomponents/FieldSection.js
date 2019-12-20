@@ -6,7 +6,7 @@ module.exports = function(text, text_arr) {
       text: text
     },
     fields: text_arr.map(val => ({
-      type: "mrkdwn",
+      type: "plain_text",
       text: val,
       emoji: true
     }))
