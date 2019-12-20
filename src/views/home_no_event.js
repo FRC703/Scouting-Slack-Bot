@@ -11,7 +11,7 @@ async function homeNoEvent(tba, event) {
         text: e.name,
         emoji: false
       },
-      value: e.key
+      value: "event_select:" + e.key
     };
   });
   let x = [

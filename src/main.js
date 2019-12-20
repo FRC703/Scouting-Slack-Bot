@@ -47,7 +47,7 @@ async function setup() {
 
   // Event Listeners
   slackEvents.on("app_home_opened", apphome);
-  slackInteract.action({ type: "block_action" }, block_action);
+  slackInteract.action({ type: "static_select" }, static_select);
   slackEvents.on("error", error => {
     console.log(error);
   });
@@ -72,7 +72,7 @@ async function apphome(event) {
   }
 }
 
-async function block_action(payload, respond) {
+async function static_select(payload, respond) {
   console.log(payload);
 }
 
