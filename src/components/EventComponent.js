@@ -9,7 +9,7 @@ module.exports = async function Event(event, tba) {
   let teamCount = eventTeams.length;
   return [
     TextSection(`<https://thebluealliance.com/${event.key}|*${event.name}*>`),
-    ...FieldSection([
+    FieldSection([
       event.address,
       `Team Count: ${teamCount}`,
       `Date: ${event.start_date}`
