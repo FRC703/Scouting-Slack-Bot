@@ -1,22 +1,15 @@
-const TextSection = require("../components/TextSection");
-const DropdownSection = require("../components/DropdownSection");
+const TextSection = require("../components/subcomponents/TextSection");
+const DropdownSection = require("../components/subcomponents/DropdownSection");
 
 async function homeNoEvent(tba, event) {
   let events = await tba.getTeamEventListSimple(703, 2019);
-  let dropdown_events = events.map(e => {
-    console.log(e.name, e.key);
-    return {
-      text: {
-        type: "plain_text",
-        text: e.name,
-        emoji: false
-      },
-      value: "event_select:" + e.key
-    };
+  let dropdown_events = events.sort(function(a, b) {
+    return a.start_date > b.start_date;
   });
+  let events = events.map(e => { return (await EventComponent(e, tba))})
   let x = [
     TextSection("No event currently selected. Select an event."),
-    DropdownSection("Select an event: ", dropdown_events)
+    ...events.flat()
   ];
   return x;
 }

@@ -32,6 +32,7 @@ async function setup() {
 
   db.defaults({
     status: "NO_EVENT",
+    currentEvent: "",
     events: [],
     users: {},
     userInterface: {}
@@ -73,12 +74,12 @@ async function apphome(event) {
 }
 
 async function static_select(payload, respond) {
-  let actions = payload.actions;
-  for (let a of actions) {
-    console.log(a);
-    if (a.type === "static_select") {
-      console.log(a.selected_option);
-    }
+  let action = payload.actions[0];
+  let val_split = action.value.split(":");
+  if (val_split[0] === "event_select") {
+    db.set("currentEvent", val_split[1]).write();
+    db.set("status", "EVENT_ACTIVE").write();
+    let view = await homeEvent(tba, event);
   }
 }
 
