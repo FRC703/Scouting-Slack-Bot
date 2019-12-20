@@ -58,7 +58,7 @@ async function apphome(event) {
     switch (status) {
       case "NO_EVENT":
         view = await homeNoEvent(tba, event);
-        return;
+        break;
     }
     console.log(JSON.stringify(view));
     console.log(
