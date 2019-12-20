@@ -53,6 +53,7 @@ async function apphome(event) {
       view = homeNoEvent(tba, event);
       return;
   }
+  console.log(view);
   slack_api.views.publish({
     user_id: event.user,
     view: view
