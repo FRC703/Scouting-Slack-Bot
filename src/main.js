@@ -45,7 +45,7 @@ async function setup() {
   slackEvents.on("app_home_opened", apphome);
   slackEvents.on("block_actions", block_action);
   slackEvents.on("error", error => {
-    console.log(error.name);
+    console.log(error);
   });
 }
 
@@ -65,7 +65,6 @@ async function apphome(event) {
       user_id: event.user,
       view: { type: "home", blocks: view }
     });
-    console.log(result);
   }
 }
 
