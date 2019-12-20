@@ -28,7 +28,12 @@ async function setup() {
   let adapter = new FileSync("/scouting.json");
   db = low(adapter);
 
-  db.defaults({ status: "NO_EVENT", events: [], users: {}, userInterface: {} });
+  db.defaults({
+    status: "NO_EVENT",
+    events: [],
+    users: {},
+    userInterface: {}
+  }).write();
 
   slack = new IncomingWebhook(webook_url);
   slack_api = new WebClient(slack_token);
