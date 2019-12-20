@@ -9,7 +9,7 @@ const proxy = process.env.http_proxy
   ? new HttpsProxyAgent(process.env.http_proxy)
   : undefined;
 
-const slack_token = process.env.SLACK_TOKEN;
+const slack_token = process.env.SLACK_BOT_USER_OAUTH;
 const tba_token = process.env.TBA_TOKEN;
 const webook_url = process.env.SLACK_WEBHOOK_URL;
 const slack_signing_secret = process.env.SLACK_SIGNING_TOKEN;
