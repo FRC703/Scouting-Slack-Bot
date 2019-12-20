@@ -61,10 +61,12 @@ async function apphome(event) {
         return;
     }
     console.log(JSON.stringify(view));
-    slack_api.views.publish({
-      user_id: event.user,
-      view: view
-    });
+    console.log(
+      await slack_api.views.publish({
+        user_id: event.user,
+        view: view
+      })
+    );
   }
 }
 
