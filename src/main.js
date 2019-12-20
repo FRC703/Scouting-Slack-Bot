@@ -47,7 +47,7 @@ async function setup() {
 
   // Event Listeners
   slackEvents.on("app_home_opened", apphome);
-  slackInteract.action({ type: "block_action", block_action });
+  slackInteract.action({ type: "block_action" }, block_action);
   slackEvents.on("error", error => {
     console.log(error);
   });
