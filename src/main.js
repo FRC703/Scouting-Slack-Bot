@@ -5,6 +5,8 @@ const { createEventAdapter } = require("@slack/events-api");
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
 
+const { homeNoEvent } = require("./views/home_no_event");
+
 const proxy = process.env.http_proxy
   ? new HttpsProxyAgent(process.env.http_proxy)
   : undefined;
@@ -26,7 +28,7 @@ async function setup() {
   let adapter = new FileSync("/scouting.json");
   db = low(adapter);
 
-  db.defaults({ events: [], users: {}, userInterface: {} });
+  db.defaults({ status: "NO_EVENT", events: [], users: {}, userInterface: {} });
 
   slack = new IncomingWebhook(webook_url);
   slack_api = new WebClient(slack_token);
@@ -36,6 +38,7 @@ async function setup() {
 
   // Event Listeners
   slackEvents.on("app_home_opened", apphome);
+  slackEvents.on("block_actions", block_action);
   slackEvents.on("error", error => {
     console.log(error.name);
   });
@@ -43,6 +46,12 @@ async function setup() {
 
 async function apphome(event) {
   console.log(event);
+  let view;
+  switch (status) {
+    case "NO_EVENT":
+      view = homeNoEvent(tba, event);
+      return;
+  }
   slack_api.views.publish({
     user_id: event.user,
     view: {
@@ -50,6 +59,10 @@ async function apphome(event) {
       blocks: [{ type: "section", text: { type: "mrkdwn", text: "Test" } }]
     }
   });
+}
+
+async function block_action(event) {
+  console.log(event);
 }
 
 async function challenge() {}
