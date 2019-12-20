@@ -29,7 +29,9 @@ async function setup() {
   });
 }
 
-async function apphome() {}
+async function apphome(event) {
+  console.log(event);
+}
 
 async function challenge() {}
 
