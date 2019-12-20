@@ -18,7 +18,6 @@ async function homeNoEvent(tba, event) {
     TextSection("No event currently selected. Select an event."),
     DropdownSection("Select an event: ", dropdown_events)
   ];
-  console.log(JSON.stringify(x));
   return x;
 }
 

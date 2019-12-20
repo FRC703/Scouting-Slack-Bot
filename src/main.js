@@ -52,18 +52,20 @@ async function setup() {
 async function apphome(event) {
   console.log(event);
   let view;
-  let status = db.get("status").value();
-  console.log(status);
-  switch (status) {
-    case "NO_EVENT":
-      view = await homeNoEvent(tba, event);
-      return;
+  if (event.tab === "home") {
+    let status = db.get("status").value();
+    console.log(status);
+    switch (status) {
+      case "NO_EVENT":
+        view = await homeNoEvent(tba, event);
+        return;
+    }
+    console.log(JSON.stringify(view));
+    slack_api.views.publish({
+      user_id: event.user,
+      view: view
+    });
   }
-  console.log(JSON.stringify(view));
-  slack_api.views.publish({
-    user_id: event.user,
-    view: view
-  });
 }
 
 async function block_action(event) {
