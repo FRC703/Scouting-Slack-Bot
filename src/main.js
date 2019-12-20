@@ -48,6 +48,7 @@ async function apphome(event) {
   console.log(event);
   let view;
   let status = db.get("status").value();
+  console.log(status);
   switch (status) {
     case "NO_EVENT":
       view = homeNoEvent(tba, event);
