@@ -5,7 +5,7 @@ const {
 } = require("./subcomponents");
 
 module.exports = async function Event(event, tba) {
-  let eventTeams = await tba.getEventTeamsKeys(event_key);
+  let eventTeams = await tba.getEventTeamsKeys(event.key);
   let teamCount = eventTeams.length;
 
   return [
