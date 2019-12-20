@@ -65,7 +65,7 @@ async function apphome(event) {
         view = await homeNoEvent(tba, event);
         break;
     }
-    console.log(view);
+    console.log(JSON.stringify(view));
     const result = await slack_api.views.publish({
       user_id: event.user,
       view: { type: "home", blocks: view }
