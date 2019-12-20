@@ -77,6 +77,8 @@ async function apphome(event) {
       user_id: event.user,
       view: { type: "home", blocks: view }
     });
+  } else {
+    debug_tab(event);
   }
 }
 
