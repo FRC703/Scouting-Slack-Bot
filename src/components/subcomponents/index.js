@@ -1,6 +1,7 @@
 const TextSection = require("./TextSection");
 const FieldSection = require("./FieldSection");
 const ActionSection = require("./ActionSection");
+const ButtonSection = require("./ButtonSection");
 const Divider = require("./Divider");
 const DropdownSection = require("./DropdownSection");
 
