@@ -74,7 +74,7 @@ async function apphome(event) {
 
 async function static_select(payload, respond) {
   let actions = payload.actions;
-  for (let a in actions) {
+  for (let a of actions) {
     console.log(a);
     if (a.type === "static_select") {
       console.log(a.selected_option);
