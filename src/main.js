@@ -3,6 +3,7 @@ const { WebClient } = require("@slack/web-api");
 // const { IncomingWebhook } = require("@slack/webhook");
 const { createEventAdapter } = require("@slack/events-api");
 const { createMessageAdapter } = require("@slack/interactive-messages");
+const { RTMClient } = require("@slack/rtm-api");
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
 
@@ -25,6 +26,8 @@ let tba;
 let slackEvents;
 
 let db;
+
+const defaultUser = { page: "" };
 
 async function setup() {
   let adapter = new FileSync("./scouting.json");
@@ -57,7 +60,11 @@ async function setup() {
 async function apphome(event) {
   console.log(event);
   let view;
-  if (event.tab === "home") {
+  // if (db.get(`users.${event.user}`).value() === undefined) {
+  //   db.set(`users.${event.user}`, defaultUser).write();
+  // }
+  let userPage = db.get(`users.${event.user}.page`).value();
+  if (event.tab === "home" && userPage === "") {
     let status = db.get("status").value();
     console.log(status);
     switch (status) {
@@ -82,9 +89,46 @@ async function button(payload, respond) {
     db.set("status", "EVENT_ACTIVE").write();
     let view = await homeEvent(tba, event);
   }
+  if (val_split[0] === "open_tab") {
+    switch (val_split[1]) {
+      case "debug":
+        db.set(`user.${payload.user}.page`, "debug").write();
+        break;
+      case "home":
+        db.set(`user.${payload.user}.page`, "").write();
+    }
+  }
 }
 
-async function challenge() {}
+async function debug_tab(event) {
+  console.log(event);
+  await slack_api.views.publish({
+    user_id: event.user,
+    view: {
+      type: "home",
+      blocks: [
+        {
+          type: "section",
+          text: { type: "plain_text", text: JSON.stringify(db.getState()) }
+        },
+        {
+          type: "actions",
+          elements: [
+            {
+              type: "button",
+              text: {
+                type: "plain_text",
+                text: "Back to home"
+              },
+              style: "primary",
+              value: "open_tab:debug"
+            }
+          ]
+        }
+      ]
+    }
+  });
+}
 
 (async function() {
   setup();
