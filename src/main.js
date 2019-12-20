@@ -27,7 +27,7 @@ let slackEvents;
 let db;
 
 async function setup() {
-  let adapter = new FileSync("/scouting.json");
+  let adapter = new FileSync("~/scouting.json");
   db = low(adapter);
 
   db.defaults({
