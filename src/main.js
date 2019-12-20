@@ -92,13 +92,17 @@ async function button(payload, respond) {
     let view = await homeEvent(tba, event);
   }
   if (val_split[0] === "open_tab") {
+    console.log(payload.user.id);
+    console.log(db.get(`users.${payload.user.id}.page`).value());
     switch (val_split[1]) {
       case "debug":
         db.set(`users.${payload.user.id}.page`, "debug").write();
         break;
       case "home":
         db.set(`users.${payload.user.id}.page`, "").write();
+        break;
     }
+    console.log(db.get(`users.${payload.user.id}.page`).value());
   }
 }
 
