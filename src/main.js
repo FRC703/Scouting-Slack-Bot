@@ -47,6 +47,7 @@ async function setup() {
 async function apphome(event) {
   console.log(event);
   let view;
+  let status = db.get("status").value();
   switch (status) {
     case "NO_EVENT":
       view = homeNoEvent(tba, event);
@@ -54,10 +55,7 @@ async function apphome(event) {
   }
   slack_api.views.publish({
     user_id: event.user,
-    view: {
-      type: "home",
-      blocks: [{ type: "section", text: { type: "mrkdwn", text: "Test" } }]
-    }
+    view: view
   });
 }
 
