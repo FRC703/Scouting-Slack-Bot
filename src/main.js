@@ -63,7 +63,7 @@ async function apphome(event) {
   // if (db.get(`users.${event.user}`).value() === undefined) {
   //   db.set(`users.${event.user}`, defaultUser).write();
   // }
-  let userPage = db.get(`users.${event.user}.page`).value();
+  let userPage = db.get(`users.${event.user}.page`).value() || "";
   if (event.tab === "home" && userPage === "") {
     let status = db.get("status").value();
     console.log(status);
