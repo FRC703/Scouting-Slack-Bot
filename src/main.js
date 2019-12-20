@@ -27,7 +27,7 @@ let slackEvents;
 
 let db;
 
-const defaultUser = { page: "" };
+const defaultUser = { page: "home" };
 
 async function setup() {
   let adapter = new FileSync("./scouting.json");
@@ -64,7 +64,7 @@ async function apphome(event) {
     db.set(`users.${event.user}`, defaultUser).write();
   }
   let userPage = db.get(`users.${event.user}.page`).value() || "";
-  if (event.tab === "home" && userPage === "") {
+  if (event.tab === "home" && userPage === "home") {
     let status = db.get("status").value();
     console.log(status);
     switch (status) {
@@ -99,7 +99,7 @@ async function button(payload, respond) {
         db.set(`users.${payload.user.id}.page`, "debug").write();
         break;
       case "home":
-        db.set(`users.${payload.user.id}.page`, "").write();
+        db.set(`users.${payload.user.id}.page`, "home").write();
         break;
     }
     console.log(db.get(`users.${payload.user.id}.page`).value());
