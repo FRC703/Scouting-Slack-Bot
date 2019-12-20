@@ -12,5 +12,6 @@ module.exports = {
   ActionSection,
   Divider,
   DropdownSection,
-  ButtonAction
+  ButtonAction,
+  ButtonSection
 };
