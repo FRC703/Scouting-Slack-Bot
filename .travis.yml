@@ -1,6 +1,9 @@
 language: node_js
 node_js:
     - 10
+
+services:
+    - docker
 cache:
     directories:
         - "$HOME/.npm"
@@ -8,6 +11,6 @@ cache:
 
 deploy:
     provider: script
-    script: ./docker_push.sh
+    script: bash ./docker_push.sh
     on:
         branch: master
