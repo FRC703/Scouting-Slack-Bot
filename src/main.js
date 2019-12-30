@@ -29,6 +29,8 @@ let db;
 
 const defaultUser = { page: "home" };
 
+console.log("Loading bot...")
+
 async function setup() {
   let adapter = new FileSync("./scouting.json");
   db = low(adapter);
