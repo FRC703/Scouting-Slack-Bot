@@ -5,3 +5,9 @@ cache:
     directories:
         - "$HOME/.npm"
         - "node_modules"
+
+deploy:
+    provider: script
+    script: ./docker_push.sh
+    on:
+        branch: master
