@@ -17,5 +17,5 @@ jobs:
             - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
             - docker build -t phoenix-scouter .
             - docker images
-            - docker tag phoenix-scouter $DOCKER_USERNAME/phoenix-scouter
-            - docker push $DOCKER_USERNAME/phoenix-scouter
+            - docker tag phoenix-scouter cr1spybacon8r/phoenix-scouter
+            - docker push cr1spybacon8r/phoenix-scouter
