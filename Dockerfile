@@ -6,4 +6,4 @@ COPY . .
 
 EXPOSE 703
 EXPOSE 9993
-CMD [ "node", "src/main.js" ]
+CMD [ "npm", "start" ]
