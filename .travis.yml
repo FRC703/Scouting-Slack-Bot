@@ -9,8 +9,13 @@ cache:
         - "$HOME/.npm"
         - "node_modules"
 
-deploy:
-    provider: script
-    script: bash ./docker_push.sh
-    on:
-        branch: master
+jobs:
+    include:
+        - stage: build docker image
+          if: branch = master
+          script:
+            - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+            - docker build -t phoenix-scouter .
+            - docker images
+            - docker tag phoenix-scouter $DOCKER_USERNAME/phoenix-scouter
+            - docker push $DOCKER_USERNAME/phoenix-scouter
